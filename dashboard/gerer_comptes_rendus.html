@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Gérer Comptes Rendus - Zoo Arcadia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <!-- Code du header -->
+    </header>
+    <main>
+        <section id="gerer_comptes_rendus">
+            <h2>Gérer Comptes Rendus</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>ID Utilisateur</th>
+                        <th>Nom de l'Animal</th>
+                        <th>Diagnostic</th>
+                        <th>Traitement</th>
+                        <th>Date de l'Examen</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $conn = new mysqli("localhost", "root", "", "zoo_arcadia");
+                    $result = $conn->query("SELECT * FROM compte_rendu_veterinaire");
+                    while ($row = $result->fetch_assoc()):
+                    ?>
+                    <tr>
+                        <td><?php echo $row['id']; ?></td>
+                        <td><?php echo $row['utilisateur_id']; ?></td>
+                        <td><?php echo $row['animal_nom']; ?></td>
+                        <td><?php echo $row['diagnostic']; ?></td>
+                        <td><?php echo $row['traitement']; ?></td>
+                        <td><?php echo $row['date_examen']; ?></td>
+                        <td>
+                            <a href="edit_compte_rendu.php?id=<?php echo $row['id']; ?>">Éditer</a>
+                            <a href="delete_compte_rendu.php?id=<?php echo $row['id']; ?>">Supprimer</a>
+                        </td>
+                    </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+            <div class="new-report-form">
+                <h3>Ajouter un Nouveau Compte Rendu</h3>
+                <form action="add_compte_rendu.php" method="post">
+                    <label for="animal_nom">Nom de l'Animal:</label>
+                    <input type="text" id="animal_nom" name="animal_nom" required>
+
+                    <label for="diagnostic">Diagnostic:</label>
+                    <textarea id="diagnostic" name="diagnostic" required></textarea>
+
+                    <label for="traitement">Traitement:</label>
+                    <textarea id="traitement" name="traitement" required></textarea>
+
+                    <label for="date_examen">Date de l'Examen:</label>
+                    <input type="date" id="date_examen" name="date_examen" required>
+
+                    <button type="submit" class="btn">Ajouter</button>
+                </form>
+            </div>
+            <div class="comments-section">
+                <h3>Commentaires sur les Habitats</h3>
+                <form action="add_commentaire.php" method="post">
+                    <label for="animal_id">ID de l'Animal:</label>
+                    <input type="text" id="animal_id" name="animal_id" required>
+
+                    <label for="commentaire">Commentaire:</label>
+                    <textarea id="commentaire" name="commentaire" required></textarea>
+
+                    <button type="submit" class="btn">Ajouter Commentaire</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <!-- Code du footer -->
+    </footer>
+</body>
+</html>

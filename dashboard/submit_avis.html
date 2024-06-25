@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Soumettre Avis - Zoo Arcadia</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="habitats.html">Habitats</a></li>
+                <li><a href="avis.html">Avis</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="index.html">Dashboard</a></li>
+                <li class="admin-login">
+                    <a href="connexion.html"><i class="fas fa-user"></i> Connexion</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="submit-avis">
+            <h2>Soumettre un Avis</h2>
+            <form action="/submit_avis.php" method="post">
+                <label for="nom">Nom:</label>
+                <input type="text" id="nom" name="nom" required>
+
+                <label for="avis">Votre Avis:</label>
+                <textarea id="avis" name="avis" rows="5" required></textarea>
+
+                <button type="submit" class="btn">Soumettre</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Zoo Arcadia. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>

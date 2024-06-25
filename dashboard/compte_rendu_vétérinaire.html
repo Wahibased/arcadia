@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Compte Rendu Vétérinaire - Zoo Arcadia</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="habitats.html">Habitats</a></li>
+                <li><a href="avis.html">Avis</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="index.html">Dashboard</a></li>
+                <li class="admin-login">
+                    <a href="connexion.html"><i class="fas fa-user"></i> Connexion</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="compte_rendu">
+            <h2>Compte Rendu Vétérinaire</h2>
+            <form action="traitement_compte_rendu.php" method="post">
+                <label for="utilisateur">Vétérinaire:</label>
+                <select id="utilisateur" name="utilisateur">
+                    <?php
+                    $conn = new mysqli("localhost", "root", "", "zoo_arcadia");
+                    $result = $conn->query("SELECT * FROM utilisateurs");
+                    while ($row = $result->fetch_assoc()):
+                    ?>
+                    <option value="<?php echo $row['id']; ?>"><?php echo $row['nom']; ?></option>
+                    <?php endwhile; ?>
+                </select>
+                
+                <label for="animal">Animal:</label>
+                <select id="animal" name="animal">
+                    <?php
+                    $result = $conn->query("SELECT * FROM animaux");
+                    while ($row = $result->fetch_assoc()):
+                    ?>
+                    <option value="<?php echo $row['id']; ?>"><?php echo $row['nom']; ?></option>
+                    <?php endwhile; ?>
+                </select>
+
+                <label for="diagnostic">Diagnostic:</label>
+                <textarea id="diagnostic" name="diagnostic" required></textarea>
+
+                <label for="traitement">Traitement:</label>
+                <textarea id="traitement" name="traitement" required></textarea>
+
+                <label for="date">Date de l'examen:</label>
+                <input type="date" id="date" name="date" required>
+                
+                <button type="submit" class="btn">Soumettre</button>
+            </form>
+
+            <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "zoo_arcadia";
+                $conn = new mysqli($servername, $username, $password, $dbname);
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+                // Traitez les données du formulaire ici
+                $conn->close();
+            }  
+
+?>
+
+
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Zoo Arcadia. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>

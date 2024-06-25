@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Gérer Utilisateurs - Zoo Arcadia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <!-- Code du header -->
+    </header>
+    <main>
+        <section id="gerer_utilisateurs">
+            <h2>Gérer Utilisateurs</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Rôle</th>
+                        <th>Date de Création</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $conn = new mysqli("localhost", "root", "", "zoo_arcadia");
+                    $result = $conn->query("SELECT * FROM utilisateurs");
+                    while ($row = $result->fetch_assoc()):
+                    ?>
+                    <tr>
+                        <td><?php echo $row['id']; ?></td>
+                        <td><?php echo $row['nom']; ?></td>
+                        <td><?php echo $row['email']; ?></td>
+                        <td><?php echo $row['role']; ?></td>
+                        <td><?php echo $row['date_creation']; ?></td>
+                        <td>
+                            <a href="edit_utilisateur.php?id=<?php echo $row['id']; ?>">Éditer</a>
+                            <a href="delete_utilisateur.php?id=<?php echo $row['id']; ?>">Supprimer</a>
+                        </td>
+                    </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+            <div class="new-user-form">
+                <h3>Ajouter un Nouvel Utilisateur</h3>
+                <form action="add_utilisateur.php" method="post">
+                    <label for="nom">Nom:</label>
+                    <input type="text" id="nom" name="nom" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="role">Rôle:</label>
+                    <select id="role" name="role" required>
+                        <option value="employe">Employé</option>
+                        <option value="veterinaire">Vétérinaire</option>
+                    </select>
+
+                    <button type="submit" class="btn">Ajouter</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <!-- Code du footer -->
+    </footer>
+</body>
+</html>
