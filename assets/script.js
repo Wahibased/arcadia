@@ -1,3 +1,14 @@
+//affichache de menu
+function showMenu() {
+    var menu = document.getElementById('nav-menu');
+    if (menu.style.display === "none") {
+        menu.style.display = "flex";
+    } else {
+        menu.style.display = "none";
+    }
+}
+
+
 //formulaire de connexion 
  //Fonction pour afficher/masquer le formulaire de connexion
 function toggleLoginForm() {

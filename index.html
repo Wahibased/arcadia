@@ -9,26 +9,25 @@
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-       <link rel="stylesheet" href="/assets/style.css" />
-    
+        <link rel="stylesheet" href="/assets/style.css" />
     <title>zoo arcadia</title>
   </head>
   <body>
     <!-- header -->
     <header class="header">
         <a href="#" class="logo"><img src="assets/image/logo.jpg" alt="Logo" /></a>
-        <nav class="navbar">
-           
-            <ul>
-               
-                <li><a href="#services">Services</a></li>
-                <li><a href="#habitats">Habitats</a></li>
-                <li><a href="#avis">Avis</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+    <nav class="navbar">
+        <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#habitats">Habitats</a></li>
+            <li><a href="#avis">Avis</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</div>
         <div class="icons">
-            <div id="menu-btn" class="fas fa-bars"></div>
+            <div class="menu">
+                <button class="menu-icon">☰</button>
             <div id="login-btn" class="fas fa-user"></div>
         </div>
         <form action="auth/login.php" method="post" class="login-form" id="login-form">
@@ -43,6 +42,21 @@
             <a href="/dashboard/index.html">
             <button type="submit" class="btn">Connexion</button></a>
         </form>
+        <script>
+            // Sélectionnez l'élément sur lequel vous voulez cliquer
+            var menuIcon = document.querySelector('.menu-icon');
+        
+            // Sélectionnez l'élément que vous souhaitez afficher ou masquer
+            var navbar = document.querySelector('.navbar');
+        
+            // Ajoutez un gestionnaire d'événements 'click' à votre icône de menu
+            menuIcon.addEventListener('click', function() {
+               
+               // Basculer entre masquer et afficher la barre de navigation
+               navbar.style.display = (navbar.style.display === 'none') ? 'block' : 'none';
+          
+  });
+        </script>
         <script>
                 document.getElementById('login-btn').addEventListener('click', function() {
             var loginForm = document.getElementById('login-form');

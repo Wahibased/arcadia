@@ -23,8 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt = $pdo->prepare('SELECT * FROM admins WHERE username = :username');
         $stmt->execute(['username' => $username]);
         $admin = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($admin && password_verify($password, $admin['password'])) {
+ if ($admin && password_verify($password, $admin['password'])) {
             // Si l'utilisateur est authentifié, stockez ses informations dans la session
             $_SESSION['admin_id'] = $admin['id'];
             $_SESSION['admin_username'] = $admin['username'];
@@ -54,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php if (isset($error)): ?>
         <div class="error-message"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
-    <form action="login.php" method="post">
+    <form action="/auth/login.php" method="post">
         <input type="text" placeholder="Nom d'utilisateur / Email" name="username" class="box" required />
         <input type="password" placeholder="Mot de passe" name="password" class="box" required />
         <div class="remember">
