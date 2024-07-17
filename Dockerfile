@@ -1,7 +1,10 @@
+# Utiliser une image de base officielle Nginx
 FROM nginx:latest
-COPY ./index.html /usr/share/nginx/html/index.
+COPY ./index.html /usr/share/nginx/html/index.html
+
 # Utiliser une image de base officielle PHP avec Apache
 FROM php:8.2.18-apache
+
 # Définir le répertoire de travail à l'intérieur du conteneur
 WORKDIR /var/www/html
 
@@ -23,7 +26,6 @@ RUN apt-get update && apt-get install -y \
     git \
     && docker-php-ext-install pdo_mysql mysqli gd exif xml
 
-
 # Copier les fichiers de l'application dans le répertoire de travail
 COPY . /var/www/html
 
@@ -41,3 +43,4 @@ EXPOSE 80
 
 # Démarrer Apache en premier plan (afin que le conteneur reste actif)
 CMD ["apache2-foreground"]
+
