@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "zoo_arcadia";
+    $dbname = "db_zoo";
     $conn = new mysqli($servername, $username, $password, $dbname);
     
     // Vérification de la connexion

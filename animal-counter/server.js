@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/animalDB', {
+mongoose.connect('mongodb://localhost:27017/animaux', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });

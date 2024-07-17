@@ -1,3 +1,7 @@
+<?php
+echo "Hello, Docker!";
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -30,7 +34,7 @@
                 <button class="menu-icon">☰</button>
             <div id="login-btn" class="fas fa-user"></div>
         </div>
-        <form action="auth/login.php" method="post" class="login-form" id="login-form">
+        <form action="login.php" method="post" class="login-form" id="login-form">
             <div class="hidden"></div>
             <h3>Login Admin</h3>
             <input type="text" placeholder="Nom d'utilisateur / Email" name="username" class="box" required />
@@ -39,7 +43,7 @@
                 <input type="checkbox" name="remember" id="remember-me" />
                 <label for="remember-me">Se souvenir de moi</label>
             </div>
-            <a href="/dashboard/index.html">
+            <a href="">
             <button type="submit" class="btn">Connexion</button></a>
         </form>
         <script>
@@ -86,7 +90,7 @@
             <div class="card-content">
                 <h3><a href="">Visite Guidée</a></h3>
                 <p>Découvrez la région avec nos visites guidées expertes.</p>
-                <a href="template/services.php" class="card-link">Voir plus</a>
+                <a href="template/services.html" class="card-link">Voir plus</a>
             </div>
         </div>
         <div class="card">
@@ -94,7 +98,7 @@
             <div class="card-content">
                 <h3><a href="">Restaurant</a></h3>
                 <p>Profitez de nos délicieux plats gastronomiques .</p>
-                <a href="template/services.php" class="card-link">Voir plus</a>
+                <a href="template/services.html" class="card-link">Voir plus</a>
             </div>
         </div>
         <div class="card">
@@ -102,7 +106,7 @@
             <div class="card-content">
                 <h3><a href="">visite en train</a></h3>
                 <p>Voyagez confortablement avec notre service de transport en train.</p>
-                <a href="template/services.php" class="card-link">Voir plus</a>
+                <a href="template/services.html" class="card-link">Voir plus</a>
             </div>
         </div>
     </div>
@@ -131,6 +135,7 @@
         </div>
     </div>
 </section>
+<!--avis-->
 <section>
 <div class="container">
     <div class="form-block">
@@ -218,13 +223,7 @@ echo '</div>';
      
     </div>
   </section>
- 
-  <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-<script src="/assets/main.js"></script>
-   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js">
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '© OpenStreetMap contributors'
-}).addTo(mymap)
+   
    </script>
 <script src="/assets/script.js" defer></script>     
     </body>

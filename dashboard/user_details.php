@@ -19,7 +19,7 @@ if ($user) {
 }
 
 // Connexion à la base de données (à adapter selon votre configuration)
-$pdo = new PDO('mysql:host=localhost;dbname=zoo_arcadia', 'root', '');
+$pdo = new PDO('mysql:host=localhost;dbname=db_zoo', 'root', '');
 
 // Vérification de la connexion
 if ($pdo === false) {
@@ -41,5 +41,5 @@ $stmt->execute([
 ]);
 
 echo "Utilisateur ajouté avec succès. Mot de passe temporaire : " . $motDePasseTemporaire;
-?>
+
 

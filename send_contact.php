@@ -35,4 +35,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Le message n'a pas pu être envoyé. Erreur de Mailer: {$mail->ErrorInfo}";
     }
 }
-?>

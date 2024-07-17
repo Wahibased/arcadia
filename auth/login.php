@@ -1,59 +1,42 @@
 <?php
 session_start();
+require_once '../config/db.php';
 
-//  informations de connexion à la base de données
-$host = 'localhost';
-$db = 'zoo_arcadia';
-$user = 'root';
-$password = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Erreur de connexion à la base de données : " . $e->getMessage());
-}
+    try {
+        $pdo = new PDO($dsn, $username, $password, $options);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = trim($_POST['username']);
-    $password = trim($_POST['password']);
-    $remember = isset($_POST['remember']) ? $_POST['remember'] : false;
-    if (!empty($username) && !empty($password)) {
-        // Préparez une instruction SQL pour éviter les injections SQL
-        $stmt = $pdo->prepare('SELECT * FROM admins WHERE username = :username');
-        $stmt->execute(['username' => $username]);
-        $admin = $stmt->fetch(PDO::FETCH_ASSOC);
- if ($admin && password_verify($password, $admin['password'])) {
-            // Si l'utilisateur est authentifié, stockez ses informations dans la session
-            $_SESSION['admin_id'] = $admin['id'];
-            $_SESSION['admin_username'] = $admin['username'];
+        // Vérifier les informations de connexion
+        $stmt = $pdo->prepare('SELECT * FROM utilisateurs WHERE email = ?');
+        $stmt->execute([$email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            header('Location: admin_dashboard.php'); // Rediriger vers le tableau de bord de l'admin
-            exit();
+        if ($user && password_verify($password, $user['password'])) {
+            // Stocker les informations de l'utilisateur dans la session
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['role'] = $user['role'];
+
+            // Redirection vers le dashboard
+            header('Location: ../dashboard/dashboard.php');
+            exit;
         } else {
-            $error = "Nom d'utilisateur ou mot de passe incorrect.";
+            $error = 'Email ou mot de passe incorrect.';
         }
-    } else {
-        $error = "Veuillez remplir tous les champs.";
+    } catch (PDOException $e) {
+        echo 'Erreur : ' . $e->getMessage();
     }
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/style.css">
-    <title>login Admin</title>
-</head>
-<body>
-<div class="login-form">
-    <h3>login Admin</h3>
-    <?php if (isset($error)): ?>
-        <div class="error-message"><?php echo htmlspecialchars($error); ?></div>
-    <?php endif; ?>
-    <form action="/auth/login.php" method="post">
+<form action="login.php" method="post" class="login-form" id="login-form">
+        <h3>Login Admin</h3>
+        <?php if (isset($error)): ?>
+            <p class="error"><?php echo $error; ?></p>
+        <?php endif; ?>
         <input type="text" placeholder="Nom d'utilisateur / Email" name="username" class="box" required />
         <input type="password" placeholder="Mot de passe" name="password" class="box" required />
         <div class="remember">
@@ -62,6 +45,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
         <button type="submit" class="btn">Connexion</button>
     </form>
-</div>
 </body>
 </html>

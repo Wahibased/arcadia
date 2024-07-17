@@ -127,14 +127,13 @@
             data: [{
                 type: "column",
                 dataPoints: [
-                    <?php
-                    $result = $conn->query("SELECT a.nom AS animal_nom, COUNT(cr.id) AS nb_consultations FROM compte_rendu_veterinaire cr
-                                            JOIN animaux a ON cr.animal_id = a.id
-                                            GROUP BY cr.animal_id");
-                    while ($row = $result->fetch_assoc()):
-                    ?>
-                    { label: "<?php echo $row['animal_nom']; ?>", y: <?php echo $row['nb_consultations']; ?> },
-                    <?php endwhile; ?>
+                  
+                   // $result = $conn->query("SELECT a.nom AS animal_nom, COUNT(cr.id) AS nb_consultations FROM compte_rendu_veterinaire cr
+                   //                         JOIN animal a ON cr.animal_id = a.id
+                     //                       GROUP BY cr.animal_id");
+                  //  while ($row = $result->fetch_assoc()):
+                   //   { label: "<?php echo $row['animal_nom']; ?>", y: <?php echo $row['nb_consultations']; ?> },
+                //    <?php endwhile; ?>
                 ]
             }]
         });

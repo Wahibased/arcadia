@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/style.css">
+    <title>Habitats</title>
+</head>
+<body>
+<header> 
+    <h1>Exploration nos Habitats</h1>
+</header>
+
+<!-- Bouton pour ajouter un nouvel habitat -->
+<button onclick="showAddHabitatForm()">Ajouter un nouvel habitat</button>
+
+<!-- Formulaire pour ajouter un nouvel habitat (initialement caché) -->
+<div id="addHabitatForm" style="display: none;">
+    <h3>Ajouter un nouvel habitat</h3>
+    <form onsubmit="addHabitat(event)">
+        <input type="text" name="habitatName" placeholder="Nom de l'habitat" required>
+        <button type="submit">Ajouter</button>
+    </form>
+</div>
+
+<!-- Boucle pour chaque habitat -->
+<?php foreach ($habitats as $habitat): ?>
+<div class="habitat">
+    <h2><?php echo htmlspecialchars($habitat['name']); ?></h2>
+    <button onclick="editHabitat('<?php echo $habitat['id']; ?>')">Modifier</button>
+    <button onclick="deleteHabitat('<?php echo $habitat['id']; ?>')">Supprimer</button>
+
+    <!-- Bouton pour ajouter un nouvel animal -->
+    <button onclick="showAddAnimalForm('<?php echo $habitat['id']; ?>')">Ajouter un animal</button>
+
+    <!-- Formulaire pour ajouter un nouvel animal (initialement caché) -->
+    <div id="addAnimalForm-<?php echo $habitat['id']; ?>" style="display: none;">
+        <h3>Ajouter un nouvel animal</h3>
+        <form onsubmit="addAnimal(event, '<?php echo $habitat['id']; ?>')">
+            <input type="text" name="animalName" placeholder="Nom de l'animal" required>
+            <input type="text" name="animalRace" placeholder="Race de l'animal" required>
+            <input type="text" name="animalState" placeholder="État de l'animal" required>
+            <input type="file" name="animalImage" accept="image/*" required>
+            <button type="submit">Ajouter</button>
+        </form>
+    </div>
+
+    <!-- Boucle pour chaque animal dans l'habitat -->
+    <?php foreach ($habitat['animals'] as $animal): ?>
+    <div class="animal-card" id="animal-<?php echo $habitat['id']; ?>-<?php echo $animal['id']; ?>" onclick="incrementCounter('<?php echo $habitat['id']; ?>', '<?php echo $animal['id']; ?>')">
+        <img src="<?php echo htmlspecialchars($animal['image']); ?>" alt="<?php echo htmlspecialchars($animal['name']); ?>">
+        <p>Nom: <?php echo htmlspecialchars($animal['name']); ?></p>
+        <p>Race: <?php echo htmlspecialchars($animal['race']); ?></p>
+        <p>Habitat: <?php echo htmlspecialchars($habitat['name']); ?></p>
+        <p>État: <span id="state-<?php echo $habitat['id']; ?>-<?php echo $animal['id']; ?>"><?php echo htmlspecialchars($animal['state']); ?></span></p>
+        <p>Consultations: <span id="counter-<?php echo $habitat['id']; ?>-<?php echo $animal['id']; ?>">0</span></p>
+        <button onclick="editAnimal('<?php echo $habitat['id']; ?>', '<?php echo $animal['id']; ?>')">Modifier</button>
+        <button onclick="deleteAnimal('<?php echo $habitat['id']; ?>', '<?php echo $animal['id']; ?>')">Supprimer</button>
+    </div>
+    <?php endforeach; ?>
+</div>
+<?php endforeach; ?>
+
+<footer>
+    <p>&copy; 2024 Zoo Arcadia. Tous droits réservés.</p>
+</footer>
+
+<script>
+    // Fonctions existantes (incrementCounter, saveToDatabase, updateDashboard)
+
+    function showAddHabitatForm() {
+        document.getElementById('addHabitatForm').style.display = 'block';
+    }
+
+    function addHabitat(event) {
+        event.preventDefault();
+        // Logique pour ajouter un habitat
+        console.log('Ajouter habitat');
+    }
+
+    function editHabitat(habitatId) {
+        // Logique pour modifier un habitat
+        console.log('Modifier habitat', habitatId);
+    }
+
+    function deleteHabitat(habitatId) {
+        // Logique pour supprimer un habitat
+        console.log('Supprimer habitat', habitatId);
+    }
+
+    function showAddAnimalForm(habitatId) {
+        document.getElementById(`addAnimalForm-${habitatId}`).style.display = 'block';
+    }
+
+    function addAnimal(event, habitatId) {
+        event.preventDefault();
+        // Logique pour ajouter un animal
+        console.log('Ajouter animal à l\'habitat', habitatId);
+    }
+
+    function editAnimal(habitatId, animalId) {
+        // Logique pour modifier un animal
+        console.log('Modifier animal', habitatId, animalId);
+    }
+
+    function deleteAnimal(habitatId, animalId) {
+        // Logique pour supprimer un animal
+        console.log('Supprimer animal', habitatId, animalId);
+    }
+</script>
+</body>
+</html>
