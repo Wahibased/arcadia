@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./app:/var/www/html
+
+  db:
+    image: mariadb:10.4
+    volumes:
+      - zoo_arcadia:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: zoo_arcadia
+      MYSQL_USER: root
+      MYSQL_PASSWORD: user_password
+
+volumes:
+  zoo_arcadia:
+
+
+
