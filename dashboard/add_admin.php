@@ -1,16 +1,18 @@
 <?php
-require_once '/config/db.php';
+echo "Current directory: " . __DIR__ . "<br>";
+echo "Include path: " . get_include_path() . "<br>";
+echo "Trying to include: " . realpath(__DIR__ . '/../config/db.php') . "<br>";
+
+require_once __DIR__ . '/../config/db.php';
+
 
 // Informations de l'administrateur
 $email = 'wahi8436@gmail.com';
 $password = password_hash('Admin123', PASSWORD_DEFAULT);
 $role = 'administrateur';
 
-// Connexion à la base de données
-try {
-    $pdo = new PDO($dsn, $username, $password, $options);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+try {
     // Vérifier si l'utilisateur existe déjà
     $stmt = $pdo->prepare('SELECT * FROM utilisateurs WHERE email = ?');
     $stmt->execute([$email]);
@@ -26,4 +28,3 @@ try {
 } catch (PDOException $e) {
     echo 'Erreur : ' . $e->getMessage();
 }
-
